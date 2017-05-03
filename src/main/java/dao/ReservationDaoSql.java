@@ -12,7 +12,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.CompagnieAerienne;
+import model.CompagnieAerienneVol;
 import model.EtatReservation;
+import model.Ouverture;
 import model.Passager;
 import model.Reservation;
 import model.Vol;
@@ -23,6 +26,7 @@ import model.Vol;
 public class ReservationDaoSql implements ReservationDao
 {
     PassagerDao passagerDao = new PassagerDaoSql();
+    VolDao VolDao = new VolDaoSql();
 
     /*
      * (non-Javadoc)
@@ -238,6 +242,8 @@ public class ReservationDaoSql implements ReservationDao
                 bo.setEtat(EtatReservation
                         .permissiveValueOf(resultSet.getString("etat")));
                 bo.setPassager(passager);
+                bo.setVol(
+                        VolDao.findById(resultSet.getInt("idVol")));
                 // j'ajoute l'objet métier ainsi muté à la liste des objets
                 // métier
                 listeBO.add(bo);
@@ -262,11 +268,11 @@ public class ReservationDaoSql implements ReservationDao
         return listeBO;
     }
 
-	@Override
-	public List<Reservation> findByVol(Vol vol) {
+    public List<Reservation> findByVol(Vol vol) {
 		// TODO Auto-generated method stub
 		// Initialiser ma liste d'objets métier
-        List<Reservation> listeVR = new ArrayList<>();
+        List<Reservation> listeVols = new ArrayList<>();
+
         try
         {
             /*
@@ -289,8 +295,9 @@ public class ReservationDaoSql implements ReservationDao
              * Etape 3 : Exécution de la requête SQL
              */
             ResultSet resultSet = statement.executeQuery(
-                    "SELECT * FROM reservation WHERE idVol = "
-                            + vol.getIdVol());
+                    "SELECT * FROM compagnie_aerienne_vol WHERE idCompagnie IN "
+                    + "( SELECT id FROM compagnie_aerienne WHERE idVol IN "
+                    + "( SELECT idVol FROM vol WHERE idVol = " + vol.getIdVol() + ")) " );
 
             /*
              * Etape 4 : Parcours des résultats
@@ -300,17 +307,20 @@ public class ReservationDaoSql implements ReservationDao
                 // Chaque ligne du tableau de résultat peut être exploitée
                 // cad, on va récupérer chaque valeur de chaque colonne
                 // je crée l'objet métier
-                Reservation vr = new Reservation();
-                // appel des mutateurs
-                vr.setIdRes(resultSet.getInt("idResa"));
-                vr.setDate(resultSet.getDate("dateReservation"));
-                vr.setNumero(resultSet.getString("numero"));
-                vr.setEtat(EtatReservation
+            	
+            	Reservation bo = new Reservation();
+            	
+            	bo.setIdRes(resultSet.getInt("idResa"));
+                bo.setDate(resultSet.getDate("dateReservation"));
+                bo.setNumero(resultSet.getString("numero"));
+                bo.setEtat(EtatReservation
                         .permissiveValueOf(resultSet.getString("etat")));
-                vr.setVol(vol);
-                // j'ajoute l'objet métier ainsi muté à la liste des objets
-                // métier
-                listeVR.add(vr);
+                bo.setVol(vol);
+                bo.setPassager(
+                        passagerDao.findById(resultSet.getInt("idPassager")));
+                listeVols.add(bo);
+
+                
             }
 
             /*
@@ -329,7 +339,7 @@ public class ReservationDaoSql implements ReservationDao
             e.printStackTrace();
         }
         // Je retourne la liste des passagers de la BDDonnéys
-        return listeVR;
+        return listeVols;
 	}
 
 }
