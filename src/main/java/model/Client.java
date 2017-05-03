@@ -3,6 +3,14 @@
  */
 package model;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author ajc
  *
@@ -20,6 +28,15 @@ public abstract class Client {
 		this.numeroFax=numeroFax;
 		this.email=email;
 		this.id=id;
+	}	
+	
+	
+	public Client (){
+	}
+	
+	public void afficherClient(){
+		System.out.println("Id du Client" + this.id + " a pour nom " + this.nom+ ", "  + ".");
+		System.out.println("il est joignable au tel: " + this.numeroTel + " Fax: " + this.numeroFax + " email: "+ this.email);
 	}
 	
 	public String getNom() {
