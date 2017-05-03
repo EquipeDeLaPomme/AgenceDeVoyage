@@ -118,7 +118,12 @@ public class ClientPhysiqueDaoSql implements ClientPhysiqueDao {
 	                
 	                clientPhysique = new ClientPhysique();
 	                
+	                clientPhysique.setPrenom(resultSet.getString("prenom"));
+	                clientPhysique.setNom(resultSet.getString("nom"));
 	                clientPhysique.setId(resultSet.getInt("idClient"));
+	                clientPhysique.setNumeroTel(resultSet.getString("numTel"));
+	                clientPhysique.setNumeroFax(resultSet.getString("numFax"));
+	                clientPhysique.setEmail(resultSet.getString("eMail"));
 	                
 	            }
 	            connexion.close();

@@ -34,9 +34,14 @@ public abstract class Client {
 	public Client (){
 	}
 	
-	public void afficherClient(){
-		System.out.println("Id du Client" + this.id + " a pour nom " + this.nom+ ", "  + ".");
-		System.out.println("il est joignable au tel: " + this.numeroTel + " Fax: " + this.numeroFax + " email: "+ this.email);
+	public void afficherInfos(){
+		System.out.println("Les informations du client sont : ");
+		System.out.println("\t - identification : " + this.id);
+		System.out.println("\t - nom : " + this.nom);
+		System.out.println("\t - tel: " + this.numeroTel);
+		System.out.println("\t - fax: " + this.numeroFax);
+		System.out.println("\t - email: "+ this.email);
+		System.out.println("");
 	}
 	
 	public String getNom() {
