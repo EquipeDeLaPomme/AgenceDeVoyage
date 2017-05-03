@@ -37,7 +37,7 @@ public class MainClement {
 		List<Vol> listeVols = volDao.findAll();
 		Vol vol = volDao.findById(30);
 		listeReservations = reservationDao.findByVol(vol);
-		listeReservations = reservationDao.findByPassager(passager);
+		//listeReservations = reservationDao.findByPassager(passager);
 		
 		System.out.println(listeReservations);
 		
