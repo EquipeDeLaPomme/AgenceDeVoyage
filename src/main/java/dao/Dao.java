@@ -2,6 +2,10 @@ package dao;
 
 import java.util.List;
 
+import model.Passager;
+import model.Reservation;
+import model.Vol;
+
 /**
  * Contrat que tous les DAOs devront respecter.
  * 
@@ -27,5 +31,8 @@ public interface Dao<T, PK>
      * @return L'objet métier trouvé
      */
     T findById(PK id);
+
+
+
 
 }

@@ -55,10 +55,6 @@ public class MainDB {
 		Reservation reservation = reservationDao.findById(10);
 		listeReservations = reservationDao.findByPassager(passager);
 
-		VolDao volDao = new VolDaoSql();
-		List<Vol> listeVols = volDao.findAll();
-		Vol vol = volDao.findById(21);
-		System.out.println(vol);
 	}
 
 }
