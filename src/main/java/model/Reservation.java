@@ -30,6 +30,7 @@ public class Reservation
      * La référence du passager
      */
     private Passager passager;
+    private Vol vol;
 
     /**
      * Constructeur
@@ -143,10 +144,25 @@ public class Reservation
      * @param passager
      *            the passager to set
      */
+    public void setVol(Vol vol)
+    {
+        this.vol = vol;
+    }
+    
+    public Vol getVol()
+    {
+        return vol;
+    }
+
+    /**
+     * @param passager
+     *            the passager to set
+     */
     public void setPassager(Passager passager)
     {
         this.passager = passager;
     }
+    
 
     /*
      * (non-Javadoc)
