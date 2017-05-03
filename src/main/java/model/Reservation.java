@@ -49,6 +49,19 @@ public class Reservation
     {
         // TODO Auto-generated constructor stub
     }
+    
+    
+    /**
+     * Méthode permettant d'afficher les informations de la réservation
+     */
+	public void afficherInfos() {
+		System.out.println("Les informations de la réservations sont : ");
+		System.out.println("\t - identifiant : " + idRes);
+		System.out.println("\t - date : " + date);
+		System.out.println("\t - numero " + numero);
+		System.out.println("\t - etat : " + etat);
+		System.out.println("");
+	}
 
     /**
      * @return the idRes
