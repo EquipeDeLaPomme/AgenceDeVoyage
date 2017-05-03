@@ -51,6 +51,22 @@ public class Adresse
     public Adresse()
     {
     }
+    
+    
+    
+    /**
+     * Méthode permettant d'afficher les informations de l'adresse
+     */
+	public void afficherInfos(){
+		System.out.println("L'adresse du passager est : ");
+		System.out.println("\t - numéro et rue : " + adresse);
+		System.out.println("\t - code postal : " + codePostal);
+		System.out.println("\t - ville : " + ville);
+		System.out.println("\t - pays : " + pays);
+		System.out.println("");
+	}
+	
+	
 
     /**
      * @return the idAdd

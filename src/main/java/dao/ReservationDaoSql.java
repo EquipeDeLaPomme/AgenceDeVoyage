@@ -15,6 +15,7 @@ import java.util.List;
 import model.EtatReservation;
 import model.Passager;
 import model.Reservation;
+import model.Vol;
 
 /**
  * @author Seme
@@ -192,6 +193,7 @@ public class ReservationDaoSql implements ReservationDao
      */
     @Override
     public List<Reservation> findByPassager(Passager passager)
+
     {
         // Initialiser ma liste d'objets métier
         List<Reservation> listeBO = new ArrayList<>();
@@ -223,7 +225,7 @@ public class ReservationDaoSql implements ReservationDao
             /*
              * Etape 4 : Parcours des résultats
              */
-            while (resultSet.next())
+            if (resultSet.next())
             {
                 // Chaque ligne du tableau de résultat peut être exploitée
                 // cad, on va récupérer chaque valeur de chaque colonne
@@ -259,5 +261,75 @@ public class ReservationDaoSql implements ReservationDao
         // Je retourne la liste des passagers de la BDDonnéys
         return listeBO;
     }
+
+	@Override
+	public List<Reservation> findByVol(Vol vol) {
+		// TODO Auto-generated method stub
+		// Initialiser ma liste d'objets métier
+        List<Reservation> listeVR = new ArrayList<>();
+        try
+        {
+            /*
+             * Etape 0 : chargement du pilote
+             */
+            Class.forName("com.mysql.jdbc.Driver");
+
+            /*
+             * Etape 1 : se connecter à la BDD
+             */
+            Connection connexion = DriverManager.getConnection(
+                    "jdbc:mysql://localhost:3306/agencedevoyage", "user1", "password");
+
+            /*
+             * Etape 2 : Création du statement
+             */
+            Statement statement = connexion.createStatement();
+
+            /*
+             * Etape 3 : Exécution de la requête SQL
+             */
+            ResultSet resultSet = statement.executeQuery(
+                    "SELECT * FROM reservation WHERE idVol = "
+                            + vol.getIdVol());
+
+            /*
+             * Etape 4 : Parcours des résultats
+             */
+            if (resultSet.next())
+            {
+                // Chaque ligne du tableau de résultat peut être exploitée
+                // cad, on va récupérer chaque valeur de chaque colonne
+                // je crée l'objet métier
+                Reservation vr = new Reservation();
+                // appel des mutateurs
+                vr.setIdRes(resultSet.getInt("idResa"));
+                vr.setDate(resultSet.getDate("dateReservation"));
+                vr.setNumero(resultSet.getString("numero"));
+                vr.setEtat(EtatReservation
+                        .permissiveValueOf(resultSet.getString("etat")));
+                vr.setVol(vol);
+                // j'ajoute l'objet métier ainsi muté à la liste des objets
+                // métier
+                listeVR.add(vr);
+            }
+
+            /*
+             * Etape 5 : je ferme la connexion à la BDD
+             */
+            connexion.close();
+        }
+        catch (ClassNotFoundException e)
+        {
+            System.err.println("Impossible de charger le pilote JDBC.");
+            e.printStackTrace();
+        }
+        catch (SQLException e)
+        {
+            System.err.println("Impossible de se connecter à la BDD.");
+            e.printStackTrace();
+        }
+        // Je retourne la liste des passagers de la BDDonnéys
+        return listeVR;
+	}
 
 }

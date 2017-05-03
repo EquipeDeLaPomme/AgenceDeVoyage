@@ -16,6 +16,7 @@ import java.util.List;
 import model.EtatReservation;
 import model.Passager;
 import model.Reservation;
+import model.Vol;
 
 /**
  * @author Seme
@@ -261,4 +262,10 @@ public class ReservationDaoFile implements ReservationDao
 
         return reservations;
     }
+
+	@Override
+	public List<Reservation> findByVol(Vol vol) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

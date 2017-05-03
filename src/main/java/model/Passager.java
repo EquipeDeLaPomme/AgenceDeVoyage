@@ -43,6 +43,20 @@ public class Passager
     public Passager()
     {
     }
+    
+    
+    /**
+     * Méthode permettant d'afficher les informations du passager
+     */
+	public void afficherInfos(){
+		System.out.println("Les informations du passager sont : ");
+		System.out.println("\t - identification : " + idPas);
+		System.out.println("\t - nom : " + nom);
+		System.out.println("\t - prenom : " + prenom);
+		System.out.println("");
+	}
+	
+	
 
     /**
      * @return the idPas
