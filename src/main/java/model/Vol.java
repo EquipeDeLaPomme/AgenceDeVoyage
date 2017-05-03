@@ -61,7 +61,8 @@ public class Vol {
 	
     @Override
     public String toString(){
-		return "Vol " + this.idVol;
+		return "Vol " + this.idVol + " : Départ [" + dateDepart + " - " + heureDepart + "] Arrivée ["
+				 + dateArrivee + " - " + heureArrivee + "]";
 	}
 	
 }
