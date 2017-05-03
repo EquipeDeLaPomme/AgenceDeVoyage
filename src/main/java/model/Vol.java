@@ -10,10 +10,31 @@ public class Vol {
 	public Date dateArrivee;
 	public Time heureDepart;
 	public Time heureArrivee;
+	
+	
+	
 
 	public Vol() {
 
 	}
+	
+	
+    /**
+     * Méthode permettant d'afficher les informations de la réservation
+     */
+	public void afficherInfos() {
+		System.out.println("Les informations du vol sont : ");
+		System.out.println("\t - identifiant : " + idVol);
+		System.out.println("\t - date de départ : " + dateDepart);
+		System.out.println("\t - heure de départ : " + heureDepart);
+		System.out.println("\t - date d'arrivée : " + dateArrivee);
+		System.out.println("\t - heure d'arrivée : " + heureArrivee);
+		System.out.println("");
+	}
+	
+	
+	
+	
 
 	public Vol(int idVol) {
 		this.idVol = idVol;
