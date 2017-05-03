@@ -18,5 +18,9 @@ public class ClientMoral extends Client {
 	public void setSiret(String siret) {
 		this.siret = siret;
 	}
+	public void afficherClientMoral(){
+		System.out.println("Le numérot de Sire et le nom du Client" + this.siret + ", "+ this.getNom() +  ".");
+		
+	}
 	
 }

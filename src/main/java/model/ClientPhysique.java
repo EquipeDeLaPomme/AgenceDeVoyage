@@ -19,7 +19,7 @@ public class ClientPhysique extends Client {
 		this.prenom = prenom;
 	}
 	public void afficherClientPhysique(){
-		System.out.println("Prenom et nom du Client" + this .prenom + ", "+ this.getNom() +  ".");
+		System.out.println("Prenom et nom du Client" + this.prenom + ", "+ this.getNom() +  ".");
 		
 	}
 }
